@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADCASOLA — Maderas Tropicales Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bark: #1a120b;
+    --bark-light: #2c1e12;
+    --grain: #3d2b1f;
+    --heartwood: #6b3a2a;
+    --teca: #c4873b;
+    --teca-light: #d4a65a;
+    --sap: #e8d5b7;
+    --cream: #f5f0e8;
+    --white: #fefcf9;
+    --leaf: #3a5a40;
+    --leaf-dark: #2d4a34;
+    --gold: #b8860b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--white);
+    color: var(--bark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVIGATION ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(26, 18, 11, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 0.8rem 3rem;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--sap);
+    letter-spacing: 4px;
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: var(--teca);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--sap);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--teca);
+    transition: width 0.4s ease;
+  }
+
+  .nav-links a:hover { color: var(--teca); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 200;
+  }
+
+  .menu-toggle span {
+    width: 28px;
+    height: 2px;
+    background: var(--sap);
+    transition: all 0.3s;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, var(--bark) 0%, var(--grain) 40%, var(--heartwood) 100%);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(196, 135, 59, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(58, 90, 64, 0.1) 0%, transparent 50%);
+  }
+
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+
+  /* Wood grain lines */
+  .wood-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0.04;
+  }
+
+  .wood-lines::before,
+  .wood-lines::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 1px;
+    background: var(--teca);
+  }
+
+  .wood-lines::before { top: 30%; left: -50%; transform: rotate(-3deg); }
+  .wood-lines::after { top: 65%; left: -50%; transform: rotate(2deg); }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    animation: fadeUp 1.2s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.4rem;
+    border: 1px solid rgba(196, 135, 59, 0.3);
+    border-radius: 50px;
+    color: var(--teca-light);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 1.2s ease-out 0.2s both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--teca);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    letter-spacing: 6px;
+    animation: fadeUp 1.2s ease-out 0.3s both;
+  }
+
+  .hero h1 .accent {
+    color: var(--teca);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--sap);
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
+    animation: fadeUp 1.2s ease-out 0.5s both;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 1px solid var(--teca);
+    color: var(--teca);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    animation: fadeUp 1.2s ease-out 0.7s both;
+  }
+
+  .hero-cta:hover {
+    background: var(--teca);
+    color: var(--bark);
+  }
+
+  .hero-cta svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s;
+  }
+
+  .hero-cta:hover svg { transform: translateY(3px); }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(232, 213, 183, 0.4);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--teca), transparent);
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 7rem 3rem; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--teca);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: var(--bark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    background: var(--cream);
+    position: relative;
+  }
+
+  .about-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+    height: 500px;
+  }
+
+  .about-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(145deg, var(--grain), var(--heartwood));
+  }
+
+  .about-img-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .tree-ring {
+    position: absolute;
+    border: 1px solid rgba(196, 135, 59, 0.15);
+    border-radius: 50%;
+    animation: ringGrow 8s ease-in-out infinite;
+  }
+
+  .tree-ring:nth-child(1) { width: 80px; height: 80px; animation-delay: 0s; }
+  .tree-ring:nth-child(2) { width: 150px; height: 150px; animation-delay: 0.5s; }
+  .tree-ring:nth-child(3) { width: 230px; height: 230px; animation-delay: 1s; }
+  .tree-ring:nth-child(4) { width: 320px; height: 320px; animation-delay: 1.5s; }
+  .tree-ring:nth-child(5) { width: 420px; height: 420px; animation-delay: 2s; }
+
+  @keyframes ringGrow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+
+  .ring-center {
+    width: 12px;
+    height: 12px;
+    background: var(--teca);
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .about-stats {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--bark);
+    padding: 1.8rem 2.2rem;
+    border-radius: 4px;
+    display: flex;
+    gap: 2.5rem;
+    z-index: 3;
+  }
+
+  .stat-item { text-align: center; }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--teca);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    color: var(--sap);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: var(--grain);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-text p strong {
+    color: var(--bark);
+    font-weight: 600;
+  }
+
+  .signature {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(61, 43, 31, 0.15);
+  }
+
+  .signature span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--heartwood);
+  }
+
+  /* ─── PRODUCTS ─── */
+  .products {
+    background: var(--white);
+    position: relative;
+  }
+
+  .products-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 4rem;
+  }
+
+  .products-header p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--grain);
+    font-weight: 300;
+  }
+
+  .wood-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .wood-card {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    background: var(--bark);
+  }
+
+  .wood-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(26, 18, 11, 0.3);
+  }
+
+  .wood-card-bg {
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wood-card-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--bark) 0%, transparent 60%);
+  }
+
+  .wood-texture {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease;
+  }
+
+  .wood-card:hover .wood-texture { transform: scale(1.08); }
+
+  /* Teca - golden amber */
+  .wood-teca .wood-texture {
+    background: linear-gradient(135deg, #8B6914 0%, #C4873B 25%, #D4A65A 50%, #A67B3D 75%, #8B6914 100%);
+    background-size: 200% 200%;
+    animation: woodShimmer 6s ease infinite;
+  }
+
+  /* IPE - deep chocolate */
+  .wood-ipe .wood-texture {
+    background: linear-gradient(135deg, #3B1F0B 0%, #5C2E0E 25%, #6B3A2A 50%, #4A2410 75%, #3B1F0B 100%);
+    background-size: 200% 200%;
+    animation: woodShimmer 7s ease infinite;
+  }
+
+  /* Saman - warm brown */
+  .wood-saman .wood-texture {
+    background: linear-gradient(135deg, #654321 0%, #8B5E3C 25%, #A0744F 50%, #7B4F2E 75%, #654321 100%);
+    background-size: 200% 200%;
+    animation: woodShimmer 8s ease infinite;
+  }
+
+  /* Pino - light honey */
+  .wood-pino .wood-texture {
+    background: linear-gradient(135deg, #C4A35A 0%, #DFC07F 25%, #E8D5A0 50%, #C9AA60 75%, #C4A35A 100%);
+    background-size: 200% 200%;
+    animation: woodShimmer 5s ease infinite;
+  }
+
+  @keyframes woodShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Wood grain overlay */
+  .wood-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 8px,
+      rgba(0,0,0,0.08) 8px,
+      rgba(0,0,0,0.08) 9px
+    );
+  }
+
+  .wood-texture::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wood-card-content {
+    padding: 2rem 2.2rem 2.5rem;
+    position: relative;
+  }
+
+  .wood-species {
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teca-light);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  .wood-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+  }
+
+  .wood-scientific {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(232, 213, 183, 0.6);
+    margin-bottom: 1.2rem;
+  }
+
+  .wood-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--sap);
+    font-weight: 300;
+  }
+
+  .wood-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .wood-tag {
+    padding: 0.3rem 0.9rem;
+    border: 1px solid rgba(196, 135, 59, 0.25);
+    border-radius: 50px;
+    font-size: 0.65rem;
+    color: var(--teca-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ─── FEATURES / WHY US ─── */
+  .features {
+    background: var(--bark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .features::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .features .section-title { color: var(--cream); }
+  .features .section-label { color: var(--teca); }
+
+  .features-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .features-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .feature-card {
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(196, 135, 59, 0.12);
+    border-radius: 6px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--teca), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-card:hover {
+    border-color: rgba(196, 135, 59, 0.3);
+    background: rgba(196, 135, 59, 0.04);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--teca);
+  }
+
+  .feature-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+  }
+
+  .feature-card p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(232, 213, 183, 0.7);
+    font-weight: 300;
+  }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--leaf-dark) 0%, var(--leaf) 50%, var(--leaf-dark) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-section .section-title {
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.1rem 3rem;
+    background: var(--teca);
+    border: none;
+    color: var(--bark);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .cta-btn:hover {
+    background: var(--teca-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(196, 135, 59, 0.3);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bark);
+    padding: 4rem 3rem 2rem;
+    border-top: 1px solid rgba(196, 135, 59, 0.1);
+  }
+
+  .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .logo {
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(232, 213, 183, 0.6);
+    font-weight: 300;
+    max-width: 350px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col li {
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-col a {
+    color: rgba(232, 213, 183, 0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 300;
+    transition: color 0.3s;
+  }
+
+  .footer-col a:hover { color: var(--teca); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(196, 135, 59, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-bottom p {
+    font-size: 0.75rem;
+    color: rgba(232, 213, 183, 0.35);
+    letter-spacing: 1px;
+  }
+
+  /* ─── LEAF DECORATION ─── */
+  .leaf-deco {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  /* ─── ANIMATIONS ON SCROLL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 968px) {
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-visual { height: 350px; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    nav { padding: 1rem 2rem; }
+  }
+
+  @media (max-width: 768px) {
+    section { padding: 5rem 1.5rem; }
+    .wood-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-stats { position: relative; bottom: auto; right: auto; margin-top: 1.5rem; justify-content: center; }
+    .nav-links { display: none; }
+    .menu-toggle { display: flex; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(26, 18, 11, 0.98);
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      z-index: 150;
+    }
+    .nav-links.open a { font-size: 1.2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { letter-spacing: 3px; }
+    .about-stats { flex-direction: column; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">ADC<span>ASOLA</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#maderas">Maderas</a></li>
+    <li><a href="#ventajas">Ventajas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="wood-lines"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Maderas Tropicales Premium</div>
+    <h1>ADC<span class="accent">ASOLA</span></h1>
+    <p class="hero-subtitle">Excelencia en maderas tropicales de origen sostenible</p>
+    <a href="#maderas" class="hero-cta">
+      Explorar Maderas
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-img">
+        <div class="about-img-inner">
+          <div class="tree-ring"></div>
+          <div class="tree-ring"></div>
+          <div class="tree-ring"></div>
+          <div class="tree-ring"></div>
+          <div class="tree-ring"></div>
+          <div class="ring-center"></div>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">Años de Exp.</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Especies</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Calidad</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <p class="section-label">Nuestra Historia</p>
+      <h2 class="section-title">Tres décadas de<br>pasión por la madera</h2>
+      <p>
+        <strong>ADCASOLA</strong> nace en 2024 como empresa, pero su verdadera historia se remonta a más de <strong>30 años de experiencia</strong> de cada uno de sus socios en el sector maderero. Décadas de conocimiento, selección rigurosa y amor por la madera tropical nos respaldan.
+      </p>
+      <p>
+        Nos especializamos en la comercialización de las más finas maderas tropicales: Teca, IPE-Guayacán, Samán y Pino Oocarpa. Cada pieza que ofrecemos es seleccionada con criterios de excelencia, garantizando durabilidad, belleza natural y responsabilidad ambiental.
+      </p>
+      <div class="signature">
+        <span>— Compromiso con la calidad desde el bosque hasta su proyecto</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="maderas">
+  <div class="products-header reveal">
+    <p class="section-label">Nuestro Catálogo</p>
+    <h2 class="section-title">Maderas Tropicales de Excelencia</h2>
+    <p>Cada especie ha sido seleccionada por su calidad excepcional, durabilidad comprobada y belleza incomparable.</p>
+  </div>
+
+  <div class="wood-grid">
+    <!-- TECA -->
+    <div class="wood-card wood-teca reveal">
+      <div class="wood-card-bg">
+        <div class="wood-texture"></div>
+      </div>
+      <div class="wood-card-content">
+        <p class="wood-species">Especie Premium</p>
+        <h3 class="wood-name">Teca</h3>
+        <p class="wood-scientific">Tectona grandis</p>
+        <p class="wood-desc">La reina de las maderas tropicales. Reconocida mundialmente por su extraordinaria resistencia a la intemperie, insectos y hongos. Su veta dorada y aceites naturales la hacen ideal para construcción naval, mobiliario de lujo y exteriores.</p>
+        <div class="wood-tags">
+          <span class="wood-tag">Alta Durabilidad</span>
+          <span class="wood-tag">Exteriores</span>
+          <span class="wood-tag">Naval</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IPE -->
+    <div class="wood-card wood-ipe reveal">
+      <div class="wood-card-bg">
+        <div class="wood-texture"></div>
+      </div>
+      <div class="wood-card-content">
+        <p class="wood-species">Ultra Resistente</p>
+        <h3 class="wood-name">IPE - Guayacán</h3>
+        <p class="wood-scientific">Tabebuia</p>
+        <p class="wood-desc">Una de las maderas más duras del mundo. Su densidad excepcional y tonos chocolate profundo la convierten en la elección definitiva para decks, pisos de alto tráfico y proyectos que demandan máxima resistencia estructural.</p>
+        <div class="wood-tags">
+          <span class="wood-tag">Máxima Dureza</span>
+          <span class="wood-tag">Pisos</span>
+          <span class="wood-tag">Decks</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAMAN -->
+    <div class="wood-card wood-saman reveal">
+      <div class="wood-card-bg">
+        <div class="wood-texture"></div>
+      </div>
+      <div class="wood-card-content">
+        <p class="wood-species">Nobleza Natural</p>
+        <h3 class="wood-name">Samán</h3>
+        <p class="wood-scientific">Samanea saman</p>
+        <p class="wood-desc">Madera noble de gran porte y vetas expresivas con tonalidades cálidas que van del marrón claro al chocolate. Perfecta para mesas de gran formato, esculturas, mobiliario artesanal y piezas decorativas de carácter único.</p>
+        <div class="wood-tags">
+          <span class="wood-tag">Artesanal</span>
+          <span class="wood-tag">Mobiliario</span>
+          <span class="wood-tag">Decoración</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PINO -->
+    <div class="wood-card wood-pino reveal">
+      <div class="wood-card-bg">
+        <div class="wood-texture"></div>
+      </div>
+      <div class="wood-card-content">
+        <p class="wood-species">Versátil y Accesible</p>
+        <h3 class="wood-name">Pino Oocarpa</h3>
+        <p class="wood-scientific">Pinus oocarpa</p>
+        <p class="wood-desc">Conífera tropical de excelente relación calidad-precio. Su grano recto y tonalidad clara miel la hacen versátil para construcción estructural, carpintería general, revestimientos y una amplia gama de aplicaciones.</p>
+        <div class="wood-tags">
+          <span class="wood-tag">Construcción</span>
+          <span class="wood-tag">Carpintería</span>
+          <span class="wood-tag">Económica</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="ventajas">
+  <div class="features-header reveal">
+    <p class="section-label">Por qué elegirnos</p>
+    <h2 class="section-title">La diferencia ADCASOLA</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+      </div>
+      <h3>30+ Años de Experiencia</h3>
+      <p>Cada socio aporta más de tres décadas de conocimiento profundo en la industria maderera. Experiencia que se traduce en selección impecable.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h3>Selección Rigurosa</h3>
+      <p>Cada pieza pasa por un proceso de selección meticuloso. Solo las maderas que cumplen nuestros estándares de calidad llegan a usted.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22c-4 0-8-2-8-6 0-3 2-5 4-7l4-5 4 5c2 2 4 4 4 7 0 4-4 6-8 6z"/>
+          <path d="M12 22v-8"/>
+          <path d="M8 18l4-4 4 4"/>
+        </svg>
+      </div>
+      <h3>Origen Responsable</h3>
+      <p>Trabajamos con fuentes sostenibles y documentadas, contribuyendo a la preservación de los bosques tropicales para las futuras generaciones.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-content reveal">
+    <p class="section-label" style="color: rgba(255,255,255,0.6);">Contáctenos</p>
+    <h2 class="section-title">¿Listo para su próximo proyecto?</h2>
+    <p>Permítanos asesorarle en la selección de la madera perfecta para sus necesidades. Nuestro equipo de expertos está a su disposición.</p>
+    <a href="mailto:contacto@adcasola.com" class="cta-btn">
+      Solicitar Cotización
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">ADC<span>ASOLA</span></a>
+      <p>Especialistas en maderas tropicales premium con más de 30 años de experiencia en la industria. Calidad, confianza y compromiso en cada pieza.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Maderas</h4>
+      <ul>
+        <li><a href="#maderas">Teca</a></li>
+        <li><a href="#maderas">IPE - Guayacán</a></li>
+        <li><a href="#maderas">Samán</a></li>
+        <li><a href="#maderas">Pino Oocarpa</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#nosotros">Nuestra Historia</a></li>
+        <li><a href="#ventajas">Ventajas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 — 2026 ADCASOLA. Todos los derechos reservados.</p>
+    <p>Maderas Tropicales Premium</p>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+reveals.forEach(el => observer.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
